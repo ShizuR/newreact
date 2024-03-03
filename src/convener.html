@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convener page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .main {
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select {
+            width: calc(100% - 24px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidebar { padding-top: 15px; }
+            .sidebar a { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#homepage"><i class="fa fa-fw fa-home"></i> Log Out</a>
+        <a href="#students"><i class="fa fa-fw fa-user"></i> View Students</a>
+        <a href="#academics"><i class="fa fa-fw fa-user"></i> View Academics</a>
+    </div>
+
+    <div class="main">
+        <h2>Welcome, <span id="convenerName">Name of convener</span></h2>
+
+        <form action="/covenermatching.html" method="post">
+            <label for="student">Choose a student:</label>
+            <select name="student" id="student">
+                <option value=""></option>
+                <option value="student1">Student 1</option>
+                <option value="student2">Student 2</option>
+                <option value="student3">Student 3</option>
+                <option value="student4">Student 4</option>
+            </select>
+            <br><br>
+            <p>Display the urn, name, and Keywords</p>
+        </form>
+
+        <form id="academicForm" action="/convenermatching.html" method="post" onsubmit="return validateForm()">
+            <label for="academics">Choose academics (minimum 2):</label>
+            <select name="academics[]" id="academics" multiple size="4">
+                <option value="academic1">Academic 1</option>
+                <option value="academic2">Academic 2</option>
+                <option value="academic3">Academic 3</option>
+                <option value="academic4">Academic 4</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <script>
+            function validateForm() {
+                var selectedOptions = document.getElementById('academics').selectedOptions;
+                if (selectedOptions.length < 2) {
+                    alert('Please select at least 2 academics');
+                    return false;
+                } else {
+                    alert('Form submission prevented. Custom message here');
+                    return false;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
